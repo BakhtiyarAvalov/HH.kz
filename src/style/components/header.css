@@ -21,8 +21,8 @@
     color: #fff;
     margin: 0 10px;
     cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .header-search {
@@ -49,8 +49,8 @@
     height: 40px;
     margin: 0 10px;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 400;
 }
 .header-button-green {
     color: #a3daa5;

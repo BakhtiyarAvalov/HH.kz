@@ -8,7 +8,7 @@ body, Image, img, div, input, a, li, ul, textarea, span, p, h1, h2, h3, ol, asid
 .container {
     max-width: 1250px;
     width: 100%; 
-    padding: 0 20px;
+    padding: 0 30px;
     display: block;
     margin: 0 auto;
 }
