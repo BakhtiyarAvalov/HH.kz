@@ -1,0 +1,25 @@
+.button {
+    height: 40px;
+    border-radius: 4px;
+    padding: 0 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.button-primary {
+    background-color: #1785E5;
+    color: #fff;
+}
+.button-primary:hover{
+    opacity: 0.8;
+}
+.button-primary-border{
+    border: 1px solid#1785e5;
+    color: #1785E5;
+    background-color: transparent;
+}
+.button-primary-border:hover {
+    opacity: 0.8;
+}
