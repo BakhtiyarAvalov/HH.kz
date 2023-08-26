@@ -1,7 +1,7 @@
 import MyResume from "./mytrsume"
     // первый вариант
     // export default function MyResumes(props){
-    // const showResumes = props.resumes.map (item =>(<MyResume/>))
+    // const showResumes = props.resumes.map (i =>(<MyResume/>))
 
     // второй вариант
     // const{resumes}=props

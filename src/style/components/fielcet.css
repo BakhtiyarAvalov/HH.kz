@@ -1,0 +1,24 @@
+.fielcet{
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    outline: none;
+    padding: 20px 0;
+}
+.fielcet-sm{
+    width: 100%;
+    max-width: 400px;
+}
+.fielcet-md{
+    width: 100%;
+    max-width: 500px;
+}
+.fielcet-lg{
+    width: 100%;
+    max-width: 600px;
+}
+.fielcet label{
+    width: 300px;
+    align-items: center;
+    display: flex;
+}

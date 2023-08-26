@@ -2,6 +2,8 @@
 import logo from '../../images/logo.png'
 import search from '../../images/search.png'
 import Image from "next/image"
+import Link from 'next/link'
+
 export default function Header () {
     return (
         <header className="header">
@@ -17,9 +19,9 @@ export default function Header () {
                             <Image src={search}/>
                             Поиск
                         </button>
-                        <button className="header-button header-button-green">
-                            Создать резюме
-                        </button>
+                        <Link className="header-button header-button-green" href='/create-resume'>
+                                Создать резюме
+                        </Link>
                         <button className="header-button">
                             Войти
                         </button>
