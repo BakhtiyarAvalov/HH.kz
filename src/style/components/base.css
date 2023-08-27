@@ -11,6 +11,7 @@ body, Image, img, div, input, a, li, ul, textarea, span, p, h1, h2, h3, ol, asid
     padding: 0 50px;
     display: block;
     margin: 0 auto;
+
 }
 .flex{
     display: flex;

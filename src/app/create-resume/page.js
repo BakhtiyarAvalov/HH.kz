@@ -3,10 +3,24 @@ import Header from '../../components/heder'
 import Input from '@/components/input'
 import { END_POINT } from '@/config/end-point'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
+import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 
-  axios.get(`${END_POINT}/api/region/cityes`).then(res =>console.log(res))
 
 export default function CreateResume() {
+  
+  const [cities, setCities] = useState([])
+  
+  useEffect(()=>{
+    axios.get(`${END_POINT}/api/region/cities`).then(res => {
+      setCities(res.data)
+    })
+  },[])
+
+  const onSelect = (data) =>{
+    console.log(data);
+  }
+
   return (
     <main>
       <Header/>
@@ -16,7 +30,7 @@ export default function CreateResume() {
         <Input placholder='' type='text' label='Имя' size='fielcet-md'/>
         <Input placholder='' type='text' label='Фамилия' size='fielcet-md'/>
         <Input placholder='' type='text' label='Мобильный телефон' size='fielcet-md'/>
-        <Input placholder='' type='text' label='Город проживания' size='fielcet-md'/>
+        <AutoCompliteSelect placholder='' type='text' label='Город проживания' size='fielcet-md' items={cities} onSelect={onSelect}/>
       </div>
     </main>
   )

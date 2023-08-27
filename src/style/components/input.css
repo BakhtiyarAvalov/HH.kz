@@ -11,3 +11,15 @@
     border: 1px solid #1785E5;
 
 }
+.autocomplite{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.teg{
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #eceff0;
+    display: inline-block;
+    margin-left: auto;
+}
