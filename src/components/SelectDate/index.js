@@ -10,7 +10,7 @@ export default function SelectDate({size, label}){
         
     }
     return(
-        <fieldset className={" fielcet " + size}>
+        <fieldset className={" fieldset " + size}>
             <label>{label}</label>  
             <div className="selectdate">
                 <input className="input" placeholder="День" type="text" onChange={onChangeDay}/>

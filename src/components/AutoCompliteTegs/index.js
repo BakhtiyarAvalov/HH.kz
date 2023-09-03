@@ -60,7 +60,7 @@ export default function AutoCompliteTegs({label, placholder, type, size, items, 
             onSelect(value)
         }, [value])
     return(
-        <div className="filset-lg">
+        <div className="fieldset-lg">
             <div className="tags">
                 {value.length > 0 && value.map(tag => <div className="teg">
                     <span>{value.name}</span><i onClick={()=>deleteTag(tag)}>X</i>

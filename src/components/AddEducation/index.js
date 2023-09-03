@@ -33,26 +33,26 @@ export default function AddEducation({onChange}){
     const educations = education.map((ed, index) =>(
         <div key="index" className="education">
             <span onClick={()=>removeEd(ed)}>X</span>
-            <fieldset className={"fielcet fielcet-md"}>
+            <fieldset className={"fieldset fieldset-md"}>
                 <label>Уровень образования</label>
                 <select className="input" name={index + "-levl"} onChange={onChangeData} value={ed.levl} >
                     <option value={"Высшее"}>Высшее</option>
                     <option value={"Не полное высшее"}>Не полное высшее</option>
                 </select>
             </fieldset>
-            <fieldset className={"fielcet fielcet-md"}>
+            <fieldset className={"fieldset fieldset-md"}>
                 <label>Название учебного заведения</label>
                 <input className="input" onChange={onChangeData} type='text' name={index + "-university_name"} value={ed.university_name}/>
             </fieldset>  
-            <fieldset className={"fielcet fielcet-md"}>
+            <fieldset className={"fieldset fieldset-md"}>
                 <label>Факультет</label>
                 <input className="input" onChange={onChangeData} type='text' name={index + "-faculty"} value={ed.faculty}/>
             </fieldset>  
-            <fieldset className={"fielcet fielcet-md"}>
+            <fieldset className={"fieldset fieldset-md"}>
                 <label>Специализация</label>
                 <input className="input" onChange={onChangeData} type='text' name={index + "-major"} value={ed.major}/>
             </fieldset>
-            <fieldset className={"fielcet fielcet-md"}>
+            <fieldset className={"fieldset fieldset-md"}>
                 <label>Год оканчания</label>
                 <input className="input" onChange={onChangeData} type='text' name={index + "-end_date"} value={ed.end_date}/>
             </fieldset>              

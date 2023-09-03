@@ -10,12 +10,14 @@ import ModalAddExp from '@/components/ModalAddExp'
 import WorkingHistory from '@/components/WorkingHistory'
 import AutoCompliteTegs from '@/components/AutoCompliteTegs'
 import AddEducation from '@/components/AddEducation'
-
+import AddLang from '@/components/AddLang'
+import SelectEmploymentTypes from '@/components/SelectEmploymentTypes'
 export default function CreateResume() {
   
   const [cities, setCities] = useState([])
   const [countries, setCountries] = useState([])
   const [skills, setSkills] = useState([])
+  const [employmentTypes, setEmploymentTypes] = useState([])
   const [modalExpIsOpen, setModalExpIsOpen]=useState(false)
   const [workingHistories, setWorkingHistories] = useState([])
 
@@ -28,6 +30,9 @@ export default function CreateResume() {
     })
     axios.get(`${END_POINT}/api/skills`).then(res => {
       setSkills(res.data)
+    })
+    axios.get(`${END_POINT}/api/employment-types`).then(res => {
+      setEmploymentTypes(res.data)
     })
 
   },[])
@@ -54,14 +59,14 @@ export default function CreateResume() {
       <div className='container'>
         <h1>Ваше резюме</h1>
         <h3>Контактные данные</h3>
-        <Input placholder='' type='text' label='Имя' size='fielcet-md'/>
-        <Input placholder='' type='text' label='Фамилия' size='fielcet-md'/>
-        <Input placholder='' type='text' label='Мобильный телефон' size='fielcet-md'/>
-        <AutoCompliteSelect placholder='' type='text' label='Город проживания' size='fielcet-md' items={cities} onSelect={onSelect}/>
+        <Input placholder='' type='text' label='Имя' size='fieldset-md'/>
+        <Input placholder='' type='text' label='Фамилия' size='fieldset-md'/>
+        <Input placholder='' type='text' label='Мобильный телефон' size='fieldset-md'/>
+        <AutoCompliteSelect placholder='' type='text' label='Город проживания' size='fieldset-md' items={cities} onSelect={onSelect}/>
 
         <h3>Основная информация</h3>
-        <SelectDate size="fildset-sm" label="Дата рождения"/>
-        <fieldset className={"fielcet fildset-sm"}>
+        <SelectDate size="fieldcet-md" label="Дата рождения"/>
+        <fieldset className={"fieldset fieldset-sm"}>
            <label>Пол</label>
            <div className='radio-group'>
             <div className="radio" >
@@ -74,14 +79,14 @@ export default function CreateResume() {
              </div>
            </div>
         </fieldset>
-        <AutoCompliteSelect placholder='' type='text' label='Гражданство' size='fielcet-md' items={countries} onSelect={onSelect}/>
+        <AutoCompliteSelect placholder='' type='text' label='Гражданство' size='fieldset-md' items={countries} onSelect={onSelect}/>
        
         <h3>Специальность</h3>
-        <Input placholder='' type='text' label='Желаемо должность' size='fielcet-lg'/>
-        <fieldset className={"fielcet fildset-sm"}>
+        <Input placholder='' type='text' label='Желаемо должность' size='fieldset-lg'/>
+        <fieldset className={"fieldset fieldset-sm"}>
            <label>Зарплата</label>
            <div className='salary'>
-             <input className='input' placholder='' type='text' size='fielcet-lg'/>
+             <input className='input' placholder='' type='text' size='fieldset-lg'/>
              <select className='input'>
               <option>KZT</option>
               <option>USD</option>
@@ -90,26 +95,38 @@ export default function CreateResume() {
              на руки
            </div>
         </fieldset>
-        
+        {/* не помещается на видимую часть при этом не выходит скролинг
+        конец окончания работы не сохраняется */}
         <h3>Опыт работы</h3>
         {modalExpIsOpen && <ModalAddExp close = {closeModalExp} addWorkingHistory={addWorkingHistory}/>}
-        <fieldset className={"fielcet fildset-lg"}>
+        <fieldset className={"fieldset fieldset-lg"}>
            <label>Места работы</label>
            <div className='exp'>
               {workingHistories.map(item => (<WorkingHistory workingHistory = {item} remove={removeWorkingHistory}/>))}
               <button onClick={()=>setModalExpIsOpen(true)} className='button button-primary-borderd'>Добавить место работы</button>
            </div>
         </fieldset>
-        <fieldset className={"fielcet fielcet-lg"}>
+        <fieldset className={"fieldset fieldset-lg"}>
            <label>О себе</label>
             <textarea className="textarea" placeholder= "Расскожите о себе"></textarea>
         </fieldset>
+
+            {/* не работает вывод на экран выбранные навыки и
+            при нажатии на образование не закрывается а выходит нахлест  */}
+        <AutoCompliteTegs placholder='' type='text' label='Ключевые навыки' size='fieldset-md' items={skills} onSelect={onSelect}/>
+        
+        <h3>Образование</h3>
+        <AddEducation onChange={() => {}}/>
+
+            {/* не работает disabled - не ввыводится как значение по умолчанию */}
+        <h3>Владение языками</h3>
+        <AddLang onChange={() => {}}/>
+
+        <h3>Другая важная информация</h3>
+        <SelectEmploymentTypes label="Занятость" size="fieldset-md" employmentTypes={employmentTypes}/>
+      
+        <button className='button button-primary'> Сохранить и опубликовать </button>
       </div>
-      
-      <AutoCompliteTegs placholder='' type='text' label='Ключевые навыки' size='fielcet-md' items={skills} onSelect={onSelect}/>
-      
-      <h3>Образование</h3>
-      <AddEducation onChange={() => {}}/>
     </main>
   )
 }
