@@ -1,11 +1,11 @@
 import { useState } from "react"
-export default function ModalAddExp({close}){
-    const [start_date, setStartDate]=useState(Date.now)
-    const [end_date, setEndtDate]=useState(Date.now)
+export default function ModalAddExp({close, addWorkingHistory}){
+    const [start_date, setStartDate] = useState(Date.now)
+    const [end_date, setEndtDate] = useState(Date.now)
     
     const [company_name, setcompany_name]=useState("")
-    const [company_description, setCompany_description]=useState("")
-    const [responsibilities, setResponsibilities]=useState("")
+    const [company_description, setCompany_description] = useState("")
+    const [responsibilities, setResponsibilities] = useState("")
 
     const onChangeMonth = (e) => {
         let date = new Date(start_date)
@@ -24,7 +24,7 @@ export default function ModalAddExp({close}){
     }
     const onChangeYearEnd = (e) => {
         let date = new Date(end_date)
-        date.setMonth(e.target.value)
+        date.setFullYear(e.target.value)
         setEndtDate(date.getTime())
     }
     const onChangeCompanyName = (e) =>{
@@ -44,11 +44,16 @@ export default function ModalAddExp({close}){
             company_name,
             company_description
         }
+        addWorkingHistory(workingHistory)
     } 
     return(
         <div className="modal">
             <div className="modal-backdrop" onClick={()=>close()}></div>
             <div className="modal-inner">
+            <div className="modal-actions">
+                    <button className="button button-primary-bordered" onClick={()=>close()}>Отменить</button>
+                    <button className="button button-primary" onClick={save}>Сохранить</button>
+                </div>
                 <h2>Опыт работы</h2>
                 <h4>Начало работы</h4>
                 <div className="selectdate selectdate-noday">
@@ -95,10 +100,10 @@ export default function ModalAddExp({close}){
                 <input className="input" placeholder="Должность" type="text" onChange={onChangeCompanyDesc} value={company_description}/>
                 <h4>Обязанности на рабочем месте</h4>
                 <textarea className="textarea" placeholder="Опишите что вы делали на рабочем месте" type="text" onChange={onChangeResp}>{responsibilities}</textarea>
-                <div className="modal-actions">
+                {/* <div className="modal-actions">
                     <button className="button button-primary-bordered" onClick={()=>close()}>Отменить</button>
                     <button className="button button-primary" onClick={save}>Сохранить</button>
-                </div>
+                </div> */}
            
             </div>
         </div>

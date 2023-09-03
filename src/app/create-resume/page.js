@@ -7,13 +7,15 @@ import { useState, useEffect } from 'react'
 import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 import SelectDate from '@/components/SelectDate'
 import ModalAddExp from '@/components/ModalAddExp'
+import WorkingHistory from '@/components/WorkingHistory'
 export default function CreateResume() {
   
   const [cities, setCities] = useState([])
   const [countries, setCountries] = useState([])
 
   const [modalExpIsOpen, setModalExpIsOpen]=useState(false)
-  
+  const [workingHistories, setWorkingHistories] = useState([])
+
   useEffect(()=>{
     axios.get(`${END_POINT}/api/region/cities`).then(res => {
       setCities(res.data)
@@ -28,6 +30,16 @@ export default function CreateResume() {
   }
   const closeModalExp = () => {
     setModalExpIsOpen(false)
+  }
+  const addWorkingHistory = (item) =>{
+    setWorkingHistories([...workingHistories, item])
+    closeModalExp()
+  }
+  const removeWorkingHistory = (workingHistory) => {
+    let wh = [...workingHistories]
+    let index = workingHistories.indexOf(workingHistory)
+    wh.splice(index, 1)
+    setWorkingHistories(wh)
   }
   return (
     <main>
@@ -71,14 +83,12 @@ export default function CreateResume() {
            </div>
         </fieldset>
         <h3>Опыт работы</h3>
-        {modalExpIsOpen && <ModalAddExp close = {closeModalExp}/>}
+        {modalExpIsOpen && <ModalAddExp close = {closeModalExp} addWorkingHistory={addWorkingHistory}/>}
         <fieldset className={"fielcet fildset-lg"}>
            <label>Места работы</label>
            <div className='exp'>
-            <div>
-              
-            </div>
-            <button onClick={()=>setModalExpIsOpen(true)} className='button button-primary-borderd'>Добавить место работы</button>
+              {workingHistories.map(item => (<WorkingHistory workingHistory = {item} remove={removeWorkingHistory}/>))}
+              <button onClick={()=>setModalExpIsOpen(true)} className='button button-primary-borderd'>Добавить место работы</button>
            </div>
         </fieldset>
       </div>
