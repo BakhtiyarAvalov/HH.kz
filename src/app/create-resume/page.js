@@ -8,11 +8,14 @@ import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 import SelectDate from '@/components/SelectDate'
 import ModalAddExp from '@/components/ModalAddExp'
 import WorkingHistory from '@/components/WorkingHistory'
+import AutoCompliteTegs from '@/components/AutoCompliteTegs'
+import AddEducation from '@/components/AddEducation'
+
 export default function CreateResume() {
   
   const [cities, setCities] = useState([])
   const [countries, setCountries] = useState([])
-
+  const [skills, setSkills] = useState([])
   const [modalExpIsOpen, setModalExpIsOpen]=useState(false)
   const [workingHistories, setWorkingHistories] = useState([])
 
@@ -23,6 +26,10 @@ export default function CreateResume() {
     axios.get(`${END_POINT}/api/region/countries`).then(res => {
       setCountries(res.data)
     })
+    axios.get(`${END_POINT}/api/skills`).then(res => {
+      setSkills(res.data)
+    })
+
   },[])
 
   const onSelect = (data) =>{
@@ -68,6 +75,7 @@ export default function CreateResume() {
            </div>
         </fieldset>
         <AutoCompliteSelect placholder='' type='text' label='Гражданство' size='fielcet-md' items={countries} onSelect={onSelect}/>
+       
         <h3>Специальность</h3>
         <Input placholder='' type='text' label='Желаемо должность' size='fielcet-lg'/>
         <fieldset className={"fielcet fildset-sm"}>
@@ -82,6 +90,7 @@ export default function CreateResume() {
              на руки
            </div>
         </fieldset>
+        
         <h3>Опыт работы</h3>
         {modalExpIsOpen && <ModalAddExp close = {closeModalExp} addWorkingHistory={addWorkingHistory}/>}
         <fieldset className={"fielcet fildset-lg"}>
@@ -91,7 +100,16 @@ export default function CreateResume() {
               <button onClick={()=>setModalExpIsOpen(true)} className='button button-primary-borderd'>Добавить место работы</button>
            </div>
         </fieldset>
+        <fieldset className={"fielcet fielcet-lg"}>
+           <label>О себе</label>
+            <textarea className="textarea" placeholder= "Расскожите о себе"></textarea>
+        </fieldset>
       </div>
+      
+      <AutoCompliteTegs placholder='' type='text' label='Ключевые навыки' size='fielcet-md' items={skills} onSelect={onSelect}/>
+      
+      <h3>Образование</h3>
+      <AddEducation onChange={() => {}}/>
     </main>
   )
 }
