@@ -95,8 +95,7 @@ export default function CreateResume() {
              на руки
            </div>
         </fieldset>
-        {/* не помещается на видимую часть при этом не выходит скролинг
-        конец окончания работы не сохраняется */}
+
         <h3>Опыт работы</h3>
         {modalExpIsOpen && <ModalAddExp close = {closeModalExp} addWorkingHistory={addWorkingHistory}/>}
         <fieldset className={"fieldset fieldset-lg"}>
@@ -111,14 +110,11 @@ export default function CreateResume() {
             <textarea className="textarea" placeholder= "Расскожите о себе"></textarea>
         </fieldset>
 
-            {/* не работает вывод на экран выбранные навыки и
-            при нажатии на образование не закрывается а выходит нахлест  */}
         <AutoCompliteTegs placholder='' type='text' label='Ключевые навыки' size='fieldset-md' items={skills} onSelect={onSelect}/>
         
         <h3>Образование</h3>
         <AddEducation onChange={() => {}}/>
 
-            {/* не работает disabled - не ввыводится как значение по умолчанию */}
         <h3>Владение языками</h3>
         <AddLang onChange={() => {}}/>
 

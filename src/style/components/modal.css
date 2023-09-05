@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    max-height: 100%;
     z-index: 20;
 }
 .modal-backdrop{
@@ -16,7 +16,7 @@
 .modal-inner{
     position: relative;
     background-color: #fff;
-    padding: 20px;
+    /* padding: 20px; */
     border-radius: 4px;
     width: 90%;
     max-width: 500px;
@@ -24,7 +24,7 @@
     z-index: 2;
 }
 .modal-actions{
-    margin: 20px;
+    /* margin: 20px; */
     display: flex;
     justify-content: flex-end;
     gap: 10px;

@@ -5,6 +5,8 @@
     border: 1px solid#e7e7e7;
     border-radius: 4px;
     width: 50%;
+    z-index: 3;
+    background-color: #fff;
 }
 .dropdown a{
     display: block;

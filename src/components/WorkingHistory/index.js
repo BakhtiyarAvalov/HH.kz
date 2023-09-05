@@ -3,7 +3,7 @@ const monthsInRussian = [
 ]
 export default function WorkingHistory({workingHistory, remove}){
     const startDate = new Date(workingHistory.start_date)
-    const endDate = new Date(workingHistory.and_date)
+    const endDate = new Date(workingHistory.end_date)
 
     return(
         <div className="working-history">

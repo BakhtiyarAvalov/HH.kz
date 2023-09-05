@@ -63,7 +63,7 @@ export default function AutoCompliteTegs({label, placholder, type, size, items, 
         <div className="fieldset-lg">
             <div className="tags">
                 {value.length > 0 && value.map(tag => <div className="teg">
-                    <span>{value.name}</span><i onClick={()=>deleteTag(tag)}>X</i>
+                    <span>{tag.name}</span><i onClick={()=>deleteTag(tag)}>X</i>
                 </div>)}
             </div>
             <div className={"autocomplite " + size}>
