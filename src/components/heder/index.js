@@ -1,10 +1,17 @@
 'use client'
+import { useDispatch, useSelector} from 'react-redux'
+import { logOut } from "@/app/store/slices/authSlice"
+
 import logo from '../../images/logo.png'
 import search from '../../images/search.png'
 import Image from "next/image"
 import Link from 'next/link'
 
 export default function Header () {
+
+    const isAuth = useSelector((state) =>state.auth.isAuth)
+    const dispatch = useDispatch()
+
     return (
         <header className="header">
             <div className = "container">
@@ -22,9 +29,12 @@ export default function Header () {
                         <Link className="header-button header-button-green" href='/create-resume'>
                                 Создать резюме
                         </Link>
-                        <button className="header-button">
+                        {!isAuth && <linc  href='/login' className="header-button">
                             Войти
-                        </button>
+                        </linc>}
+                        {isAuth && <a onClick={() => dispatch(logOut())} className="header-button">
+                            Выйти
+                        </a>}
                     </div>
                 </div>
             </div>
