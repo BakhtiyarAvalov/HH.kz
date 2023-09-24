@@ -5,6 +5,7 @@ import MyResumes from '@/components/myresumes'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyResumes } from '@/app/store/slices/resumeSlice'
+import Link from 'next/link'
 
 export default function ResumePage() {
   
@@ -21,7 +22,7 @@ export default function ResumePage() {
         <div className='container'>
             <div className="flex flex-ai-c flex-jc-sb ptb7">
                 <h1>Мои резюме</h1>
-                <button className='button button-secondary-bordered'>Создать резюме</button>
+                <Link href="create-resume" className='button button-secondary-bordered'>Создать резюме</Link>
             </div>
             <MyResumes resumes={resumes}/>
         </div>

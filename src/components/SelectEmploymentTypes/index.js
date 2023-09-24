@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export default function SelectEmploymentTypes({employmentTypes, label, size}){
+export default function SelectEmploymentTypes({employmentTypes, label, size, onChange}){
     const [eTypes, setEtypes] = useState([])
         const onSelect = (e) =>{
         console.log(e.target.value);
@@ -13,6 +13,11 @@ export default function SelectEmploymentTypes({employmentTypes, label, size}){
           setEtypes(tps)
         }
     }
+
+    useEffect(() => {
+        onChange(eTypes)
+    }),[eTypes]
+
     return(
         <fieldset className={"fieldset " + size}>
            <label>{label}</label>

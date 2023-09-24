@@ -17,7 +17,7 @@ export default function AutoCompliteSelect({label, placholder, type, size, items
         onSelect(null)
     }
     const onChange = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         if(e.target.value === ""){
             setFilteredItems([]) 
         }else{
@@ -28,7 +28,7 @@ export default function AutoCompliteSelect({label, placholder, type, size, items
             // setFilteredItems([...items.filter(item => item.name.includes(e.target.value))])
             }
         }
-   console.log(items);
+//    console.log(items);
     return(
         <div className={"autocomplite " + size}>
             <Input placeholder={placholder} type={type} onChange={onChange} label={label} size={size} />

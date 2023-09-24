@@ -4,7 +4,7 @@ export default function AddEducation({onChange}){
     const [education, setEducation] = useState([])
     const newEducation = () => {
         setEducation([...education, {
-            levl: "",
+            levl: "Высшее",
             university_name: "",
             faculty: "",
             major: "",

@@ -47,9 +47,9 @@ export default function ModalAddExp({close, addWorkingHistory}){
         addWorkingHistory(workingHistory)
     } 
     return(
-        <div className="modal">
+        <div className="modal" style={{overflow: 'scroll'}}>
             <div className="modal-backdrop" onClick={()=>close()}></div>
-            <div className="modal-inner">
+            <div className="modal-inner p3">
                 <h2>Опыт работы</h2>
                 <h4>Начало работы</h4>
                 <div className="selectdate selectdate-noday">
