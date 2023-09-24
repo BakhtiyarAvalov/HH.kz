@@ -3,14 +3,16 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
 import { END_POINT } from '@/config/end-point'
+
 const token = localStorage.getItem("token")
-let decoded = jwt_decode(token)
+
 let initialState = {
   isAuth: false,
   currentUser: null,
   tokenExt: 0
 }
 // console.log(token);
+
 if(token){
   let decodedToken = jwt_decode(token)
   if(decodedToken.exp * 1000 > Date.now()){
@@ -31,9 +33,11 @@ if(token){
     localStorage.removeItem("token")
   }
 }
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
+
   reducers: {
     authorize: (state, actions) => {
       localStorage.setItem("token", actions.payload.token)
