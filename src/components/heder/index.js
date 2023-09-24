@@ -17,13 +17,13 @@ export default function Header () {
             <div className = "container">
                 <div className="header-item">
                     <div className = "header-iner">
-                        <Image src={logo}/>
+                        <Image alt='' src={logo}/>
                         <a>Работадетялм</a>
                         <a>Помощь</a>
                     </div>
                     <div className = "header-iner">
                         <button className="header-search">
-                            <Image src={search}/>
+                            <Image alt='' src={search}/>
                             Поиск
                         </button>
                         <Link className="header-button header-button-green" href='/create-resume'>
