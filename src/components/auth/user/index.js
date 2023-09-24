@@ -26,10 +26,14 @@ export default function UserLogin () {
     }
 
     useEffect(()=>{
+        let timeCurrent = time
         let interval;
         if(step===2){
-            let interval = setInterval(()=>{
-               if(time !== 0) setTime(time => time-1)
+            let interval = setInterval(() => {
+               if(timeCurrent > 0) {
+                    setTime(time => time-1)
+                    timeCurrent--
+                }
             }, 1000)
         }else if(interval){
             clearInterval(interval)
