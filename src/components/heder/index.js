@@ -29,9 +29,9 @@ export default function Header () {
                         <Link className="header-button header-button-green" href='/create-resume'>
                                 Создать резюме
                         </Link>
-                        {!isAuth && <linc  href='/login' className="header-button">
+                        {!isAuth && <Link  href='/login' className="header-button">
                             Войти
-                        </linc>}
+                        </Link>}
                         {isAuth && <a onClick={() => dispatch(logOut())} className="header-button">
                             Выйти
                         </a>}

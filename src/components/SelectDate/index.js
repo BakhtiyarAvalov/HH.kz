@@ -5,13 +5,13 @@ export default function SelectDate({size, label, onChange}){
     const [month, setMonth] = useState(0)
     const [year, setYear] = useState("")
 
-    // useEffect(() => {
-    //     const date = new Date()
-    //     date.setFullYear(year)
-    //     date.setMonth(month)
-    //     date.setDate(day)
-    //     onChange(date)
-    // }), [day, year, month]
+    useEffect(() => {
+        const date = new Date()
+        date.setFullYear(year)
+        date.setMonth(month)
+        date.setDate(day)
+        onChange(date)
+    },[day, year, month]) 
     
     return(
         <fieldset className={" fieldset " + size}>

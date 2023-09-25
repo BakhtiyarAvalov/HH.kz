@@ -54,10 +54,10 @@ export default function UserLogin () {
            {isAuth ? "True" : "False"}
            {step === 1 && <div className="card">
                 <h1>Поиск работы</h1>
-                <from>
+                <form>
                     <input className="input" placeholder="Введите e-mail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     <button className="button button-primary" onClick={sendVerifyEmail}>Продолжить</button>
-                </from>
+                </form>
             </div>}
 
             {step === 1 && <div className="card">
@@ -69,21 +69,21 @@ export default function UserLogin () {
             {step === 2 && <div className="card">
                 <h1>Отправили код на...</h1>
                 <p>Напишите его, что бы подтвердить, что это вы, а не кто-то другой входит в личный кабинет </p>
-                <from>
+                <form>
                     <input className="input" placeholder="Введите код" value={code} onChange={(e)=>setCode(e.target.value)}/>
                     <p>Повторить можно через {min}:{sec}</p>
                     <button className="button button-primary" type="button" onClick={verifycodeFunc}>Продолжить</button>
                     <button className="button button-primary-border" type="button" onClick={()=>setStep(1)}>Назад</button>
-                </from>
+                </form>
             </div>}
             {step === 3 && <div className="card">
                 <h1>Давайте познакомимся</h1>
-                <from>
+                <form>
                     <input className="input" placeholder="Имя"/>
                     <input className="input" placeholder="Фамилия"/>
                     <button className="button button-primary" type="button" onClick={()=>dispatch(authorize())}>Продолжить</button>
                     <button className="button button-primary-border" onClick={()=>setStep(2)}>Назад</button>
-                </from>
+                </form>
             </div>}
         </section>
     )
