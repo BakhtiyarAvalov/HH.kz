@@ -10,7 +10,7 @@ export default function AddLang({onChange, foreignLanguages, setForeignLanguages
     const onSelect = (e) =>{
         const [index, key] = e.target.name.split("-")
         const langs = [...foreignLanguages];
-        langs[index][key] = e.target.value;
+        langs[index] [key] = e.target.value;
         onChange(langs)
     }
 
@@ -36,7 +36,7 @@ export default function AddLang({onChange, foreignLanguages, setForeignLanguages
     return(
         <div className="eds">
             {lns}
-            <a onClick={()=> setForeignLanguages ([...foreignLanguages, {name: "", level: ""}])}>Добавить язык</a>
+            <a onClick={() => setForeignLanguages([...foreignLanguages, {name: "", level: ""}])}>Добавить язык</a>
         </div>
     )
 }
