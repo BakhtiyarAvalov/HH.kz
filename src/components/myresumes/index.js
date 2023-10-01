@@ -12,12 +12,8 @@ export default function MyResumes({resumes}){
 
     const showResumes = resumes.map (item =>(
     <MyResume 
-        position = {item.position} 
-        createdAt = {item.createdAt}
-        show = {0}
-        views = {0}
-        applise = {0}
-        kay = {item.id}
+        item = {item}
+        key = {item.id}
     />))
     return <div>
         {showResumes}

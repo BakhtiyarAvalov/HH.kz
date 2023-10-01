@@ -8,7 +8,8 @@ import { END_POINT } from '@/config/end-point'
 export const resumeSlice = createSlice({
   name: 'resume',
   initialState: {
-    resumes: []
+    resumes: [],
+    resume: {},
   },
 
   reducers: {
@@ -17,12 +18,15 @@ export const resumeSlice = createSlice({
     },
     uppendResume: (state, action) => {
       state.resumes = [...state.resumes, action.payload.newresume]
+    },
+    setResume: (state, action) => {
+      state.resume = action.payload.resume
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyResumes, uppendResume } = resumeSlice.actions
+export const { setMyResumes, uppendResume, setResume } = resumeSlice.actions
 
 export const getMyResumes = () => async (dispatch) => {
     try{
@@ -33,6 +37,18 @@ export const getMyResumes = () => async (dispatch) => {
         alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
     }
 }
+
+export const getResumeById = (id) => async (dispatch) => {
+  try{
+      const res = await axios.get(`${END_POINT}/api/resume/${id}`)
+      console.log("test", res.data);
+      dispatch(setResume({resume: res.data}))
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+    // console.log(e);
+    }
+}
+
 
 export const createResume = (sendData, router) => async (dispatch) => {
   try{
