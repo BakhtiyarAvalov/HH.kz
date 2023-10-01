@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export default function SelectDate({size, label, onChange}){
+export default function SelectDate({size, label, onChange, value}){
     const [day, setDay] = useState("")
     const [month, setMonth] = useState(0)
     const [year, setYear] = useState("")
@@ -13,6 +13,15 @@ export default function SelectDate({size, label, onChange}){
         onChange(date)
     },[day, year, month]) 
     
+    useEffect(()=>{
+        if(value){
+            const date = new Date(value)
+            setDay(date.getDate())
+            setMonth(date.getMonth())
+            setYear(date.getFullYear())
+        }
+    }, [value])
+
     return(
         <fieldset className={" fieldset " + size}>
             <label>{label}</label>  
