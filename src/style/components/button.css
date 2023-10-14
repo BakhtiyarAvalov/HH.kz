@@ -9,6 +9,7 @@
     align-items: center;
     display: flex;
     text-decoration: none;
+    justify-content: center;
 }
 .button-primary {
     background-color: #1785E5;

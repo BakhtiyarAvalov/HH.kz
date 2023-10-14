@@ -9,7 +9,8 @@ const token = localStorage.getItem("token")
 let initialState = {
   isAuth: false,
   currentUser: null,
-  tokenExt: 0
+  tokenExt: 0,
+  error: null,
 }
 console.log(token);
 
@@ -79,6 +80,25 @@ export const verifycode = (email, code) => (dispatch) => {
     code,
   } ).then(res => {
     dispatch(authorize(res.data)) 
+  })
+
+}
+export const signUp = (data) => (dispatch) => {
+  const fd = new FormData
+  fd.append("full_name", data.full_name)
+  fd.append("email", data.email)
+  fd.append("password", data.password)
+  fd.append("password2", data.password)
+  fd.append("company_name", data.company_name)
+  fd.append("company_description", data.company_description)
+  fd.append("company_address", data.company_address)
+  fd.append("company_logo", data.company_logo)
+  console.log("fd", fd);
+  axios.post(`${END_POINT}/api/auth/signup`, fd ).then(res => {
+    // dispatch(authorize(res.data)) 
+    console.log("res.data", res.data);
+  }).catch(e => {
+    console.log(e.res.data);
   })
 
 }
