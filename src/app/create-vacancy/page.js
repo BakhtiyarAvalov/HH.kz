@@ -3,21 +3,24 @@
 import { useEffect, useState } from 'react'
 import Header from '../../components/heder'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSpecializations, getСities, getExperiences, getSkills, getEmpType, setEmpType } from '@/app/store/slices/vacancySlice'
+import { getSpecializations, getСities, getExperiences, getSkills, getEmpType, createVacancy } from '@/app/store/slices/vacancySlice'
 import ModalselectSpec from '@/components/ModalselectSpec'
 import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 import { handleClientScriptLoad } from 'next/script'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import AutoCompliteTegs from '@/components/AutoCompliteTegs'
+import { useRouter } from 'next/navigation'
 
 export default function CreateVacancy() {
 
+    const [isSpecModalOpen, setIsSpecModalOpen] = useState(false)
     const dispatch = useDispatch()
+   
     const [name, setName] = useState("")
     const [specializationId, setSpecialization] = useState()
+    const [specializationName, setSpecializationName] = useState()
     const [cityId, setCity] = useState()
-    const [isSpecModalOpen, setIsSpecModalOpen] = useState(false)
     const [salary_from, setSalaryFrom] = useState("")
     const [salary_to, setSalaryTo] = useState("")
     const [salary_type, setSalaryType] = useState("KZT")
@@ -38,9 +41,13 @@ export default function CreateVacancy() {
         dispatch(getEmpType())
     }, [])
 
+    const router = useRouter()
+
     const hendelOnSpecChange = (e) => {
         // console.log(e.target.value, e);
-        setSpecialization(e.target.value*1)
+        setSpecialization(e.target.value * 1)
+        setSpecializationName(e.target.dataset.name)
+        closeSpecModal()
     }
 
     const handleChangeExp = e =>{
@@ -49,8 +56,25 @@ export default function CreateVacancy() {
 
     const onSkillsChange = (data) => {
         const arr = data.map(item => item.name)
-        setSellektedSkills(arr.join(","))}
-
+        setSellektedSkills(arr.join(","))
+    }
+    const hendelSave = () => {
+        dispatch(createVacancy({
+            name, 
+            specializationId: `${specializationId}`,
+            cityId: `${cityId}`,
+            description,
+            employmentTypeId,
+            salary_from, 
+            salary_to, 
+            salary_type, 
+            address, 
+            experienceId, 
+            skills, 
+            about_company: ""
+        }, router))
+    }
+    
     const cities = useSelector(state => state.vacancy.cities)
     const experiences = useSelector(state => state.vacancy.experiences)
     const allSkills = useSelector(state => state.vacancy.skills)
@@ -64,19 +88,20 @@ export default function CreateVacancy() {
             <h2>Основная информация</h2>
             <fieldset className='fieldset-vertical'>
                 <label>Название вакансии</label>
-                <input className='input' placeholder='Название' type='text' value={name} onChange={() => setName(e.target.value)}/>
+                <input className='input' placeholder='Название' type='text' value={name} onChange={(e) => setName(e.target.value)}/>
             </fieldset>
             <fieldset className='fieldset-vertical'>
                 <label>Указать специализацию</label>
+                {specializationName && <p>{specializationName}</p>}
                 <p className='link' onClick={() => setIsSpecModalOpen(true)} >Указать специализацию</p>
             </fieldset>
-            {isSpecModalOpen && <ModalselectSpec close = {closeSpecModal}  onChange={hendelOnSpecChange} value={specializationId}/>}
+            {isSpecModalOpen && <ModalselectSpec close = {closeSpecModal}  onChange={hendelOnSpecChange} value={specializationId * 1}/>}
             <AutoCompliteSelect placholder='' type='text' label='Город проживания' size='fieldset-md fieldset-vertical' items={cities} onSelect={(data) => setCity(data.id)} />
             <fieldset className='fieldset-vertical fieldset-md'>
                 <label>Предпологаемый уровень дохода в месяц</label>
                 <div className='input-group'>
-                    <input className='input' placeholder='От' type='text' value={salary_from} onChange={() => setSalaryFrom(e.target.value)}/>
-                    <input className='input' placeholder='До' type='text' value={salary_to} onChange={() => setSalaryTo(e.target.value)}/>
+                    <input className='input' placeholder='От' type='text' value={salary_from} onChange={(e) => setSalaryFrom(e.target.value)}/>
+                    <input className='input' placeholder='До' type='text' value={salary_to} onChange={(e) => setSalaryTo(e.target.value)}/>
                     <select className='input' onChange={e => {setSalaryType(e.target.value)}} value={salary_type}>
                         <option value={"KZT"}>KZT</option>
                         <option value={"USD"}>USD</option>
@@ -86,7 +111,7 @@ export default function CreateVacancy() {
             </fieldset>
             <fieldset className='fieldset-vertical'>
                 <label>Адрес</label>
-                <input className='input' placeholder='Введите адрес' type='text' value={address} onChange={() => setAddress(e.target.value)}/>
+                <input className='input' placeholder='Введите адрес' type='text' value={address} onChange={(e) => setAddress(e.target.value)}/>
             </fieldset>
             <fieldset className='fieldset-vertical fieldset-md'>
                 <label>Опыт работы</label>
@@ -134,7 +159,7 @@ export default function CreateVacancy() {
                     </div>)}
                 </div>
             </fieldset>
-            <button className='button button-primary'>Создать</button>
+            <button className='button button-primary' onClick={hendelSave}>Создать</button>
         </div>
     </main>
   )

@@ -21,9 +21,7 @@ export const vacancySlice = createSlice({
     setMyVacancies: (state, action) => {
         state.vacancies = action.payload.vacancies
     },
-    // uppendVacancy: (state, action) => {
-    //   state.vacancies = [...state.vacancies, action.payload.vacancy]
-    // },
+    
     // setVacancies: (state, action) => {
     //   state.vacancy = action.payload.vacancy
     // }, 
@@ -51,7 +49,7 @@ export const vacancySlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyVacancies, uppendVacancy, setVacancies, hendelDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType } = vacancySlice.actions
+export const { setMyVacancies, setVacancies, hendelDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType } = vacancySlice.actions
 
 export const getMyVacancies = () => async (dispatch) => {
     try{
@@ -110,6 +108,15 @@ export const getEmpType = () => async (dispatch) => {
       alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
   }
 }
+
+export const createVacancy = (sendData, router) => async (dispatch) => {
+  try{
+      const res = await axios.post(`${END_POINT}/api/vacancy`, sendData)
+      router.push("/vacancy")
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+  }
+}
 // export const getResumeById = (id) => async (dispatch) => {
 //   try{
 //       const res = await axios.get(`${END_POINT}/api/resume/${id}`)
@@ -122,17 +129,6 @@ export const getEmpType = () => async (dispatch) => {
 // }
 
 
-// export const createResume = (sendData, router) => async (dispatch) => {
-//   try{
-//       const res = await axios.post(`${END_POINT}/api/resume`, sendData)
-//       router.push("/resumes")
-//       // console.log(res.data);
-//       // console.log(e);
-//       dispatch(uppendResume({newresume: res.data}))
-//   }catch(e){
-//       alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
-//   }
-// }
 
 // export const editResume = (sendData, router) => async (dispatch) => {
 //   try{
