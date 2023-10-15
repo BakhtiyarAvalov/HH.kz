@@ -72,11 +72,11 @@ export default function AutoCompliteTegs({label, placholder, type, size, items, 
                 <Input placeholder={placholder} type={type} onChange={onChange} label={label} size={size} />
                 {filteredItems.length > 0 &&<div className="dropdown dropdown-tags">
                     <h4>Рекомендуемые навыки</h4>
-                    {filteredItems.map(item => (<a onClick={() => onClick(item)}>{item.name}</a>))}
+                    {filteredItems.map(item => (<a key={item.id} onClick={() => onClick(item)}>{item.name}</a>))}
                 </div>}
             </div>
             <div className="tags">
-                {value.length > 0 && value.map(tag => <div className="teg">
+                {value.length > 0 && value.map(tag => <div key={tag.id} className="teg">
                     <span>{tag.name}</span><i onClick={()=>deleteTag(tag)}>X</i>
                 </div>)}
             </div>

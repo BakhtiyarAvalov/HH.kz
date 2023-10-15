@@ -7,6 +7,8 @@
     width: 50%;
     z-index: 3;
     background-color: #fff;
+    z-index: 20;
+    background: #fff;
 }
 .dropdown a{
     display: block;

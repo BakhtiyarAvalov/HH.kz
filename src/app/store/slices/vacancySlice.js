@@ -10,7 +10,11 @@ export const vacancySlice = createSlice({
   initialState: {
     vacancies: [],
     vacancy: {},
-    specializations: {}
+    specializations: {},
+    cities: [],
+    experiences: [],
+    skills: [],
+    empTypes: []
   },
 
   reducers: {
@@ -31,11 +35,23 @@ export const vacancySlice = createSlice({
     setSpecializations: (state, action) => {
       state.specializations = action.payload
     }, 
+    setCities: (state, action) => {
+      state.cities = action.payload
+    },
+    setExps: (state, action) => {
+      state.experiences = action.payload
+    },
+    setSkills: (state, action) => {
+      state.skills = action.payload
+    },
+    setEmpType: (state, action) => {
+      state.empTypes = action.payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMyVacancies, uppendVacancy, setVacancies, hendelDeleteVacancy, setSpecializations } = vacancySlice.actions
+export const { setMyVacancies, uppendVacancy, setVacancies, hendelDeleteVacancy, setSpecializations, setCities, setExps, setSkills, setEmpType } = vacancySlice.actions
 
 export const getMyVacancies = () => async (dispatch) => {
     try{
@@ -57,6 +73,43 @@ export const getSpecializations = () => async (dispatch) => {
   }
 }
 
+export const getСities = () => async (dispatch) => {
+  try{
+      const res = await axios.get(`${END_POINT}/api/region/cities`)
+      // console.log(res.data);
+      dispatch(setCities(res.data))
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+  }
+}
+
+export const getExperiences = () => async (dispatch) => {
+  try{
+      const res = await axios.get(`${END_POINT}/api/experiences`)
+      // console.log(res.data);
+      dispatch(setExps(res.data))
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+  }
+}
+export const getSkills = () => async (dispatch) => {
+  try{
+      const res = await axios.get(`${END_POINT}/api/skills`)
+      // console.log(res.data);
+      dispatch(setSkills(res.data))
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+  }
+}
+export const getEmpType = () => async (dispatch) => {
+  try{
+      const res = await axios.get(`${END_POINT}/api/employment-types`)
+      // console.log(res.data);
+      dispatch(setEmpType(res.data))
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+  }
+}
 // export const getResumeById = (id) => async (dispatch) => {
 //   try{
 //       const res = await axios.get(`${END_POINT}/api/resume/${id}`)
