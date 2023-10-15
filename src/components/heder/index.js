@@ -30,12 +30,12 @@ export default function Header () {
                             <Image alt='' src={search}/>
                             Поиск
                         </button>
-                        {currentUser && currentUser.role && currentUser.role.name === "manager" &&
+                        {currentUser && currentUser.role && currentUser.role.name !== "manager" &&
                             <Link className="header-button header-button-green" href='/create-vacancy'>
                                     Создать резюме
                             </Link>
                         }
-                        {currentUser && currentUser.role && currentUser.role.name !== "manager" &&
+                        {currentUser && currentUser.role && currentUser.role.name === "manager" &&
                             <Link className="header-button header-button-green" href='/create-resume'>
                                     Создать вакансию
                             </Link>
