@@ -62,11 +62,14 @@ export const authSlice = createSlice({
       state.exp = 0
       localStorage.removeItem("token")
     },
+    setError: (state, actions) => {
+      state.error = actions.payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { authorize, logOut} = authSlice.actions
+export const { authorize, logOut, setError} = authSlice.actions
 
 export const sendVerificationEmail = (email) => (dispatch) => {
   axios.post(`${END_POINT}/api/auth/sendmail`,{
@@ -83,7 +86,7 @@ export const verifycode = (email, code) => (dispatch) => {
   })
 
 }
-export const signUp = (data) => (dispatch) => {
+export const signUp = (data, router) => (dispatch) => {
   const fd = new FormData
   fd.append("full_name", data.full_name)
   fd.append("email", data.email)
@@ -95,12 +98,25 @@ export const signUp = (data) => (dispatch) => {
   fd.append("company_logo", data.company_logo)
   console.log("fd", fd);
   axios.post(`${END_POINT}/api/auth/signup`, fd ).then(res => {
-    // dispatch(authorize(res.data)) 
-    console.log("res.data", res.data);
+    router.push("/signin")
+    // console.log("res.data", res.data);
   }).catch(e => {
-    console.log(e.res.data);
+    // console.log(e.res.data);
+    if(e.response && e.response.data)
+    dispatch(setError(e.response.data))
   })
+}
 
+export const sigIn = (data, router) => (dispatch) => {
+  axios.post(`${END_POINT}/api/auth/login`, data ).then(res => {
+    dispatch(authorize(res.data)) 
+    router.push("/vacancy")
+    // console.log("res.data", res.data);
+  }).catch(e => {
+    // console.log(e.res.data);
+    if(e.response && e.response.data)
+    dispatch(setError(e.response.data))
+  })
 }
 
 export default authSlice.reducer

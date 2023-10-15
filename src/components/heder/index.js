@@ -10,6 +10,8 @@ import Link from 'next/link'
 export default function Header () {
 
     const isAuth = useSelector((state) =>state.auth.isAuth)
+    const currentUser = useSelector((state) =>state.auth.currentUser)
+
     const dispatch = useDispatch()
 
     return (
@@ -18,6 +20,8 @@ export default function Header () {
                 <div className="header-item">
                     <div className = "header-iner">
                         <Image alt='' src={logo}/>
+                        {currentUser && currentUser.role && currentUser.role.name === "manager" && <Link href="/vacancy">Мои вакансии</Link>}
+                        {currentUser && currentUser.role && currentUser.role.name !== "manager" && <Link href="/resumes">Мои резюме</Link>}
                         <a>Работадетялм</a>
                         <a>Помощь</a>
                     </div>
@@ -26,9 +30,16 @@ export default function Header () {
                             <Image alt='' src={search}/>
                             Поиск
                         </button>
-                        <Link className="header-button header-button-green" href='/create-resume'>
-                                Создать резюме
-                        </Link>
+                        {currentUser && currentUser.role && currentUser.role.name === "manager" &&
+                            <Link className="header-button header-button-green" href='/create-vacancy'>
+                                    Создать резюме
+                            </Link>
+                        }
+                        {currentUser && currentUser.role && currentUser.role.name !== "manager" &&
+                            <Link className="header-button header-button-green" href='/create-resume'>
+                                    Создать вакансию
+                            </Link>
+                        }
                         {!isAuth && <Link  href='/login' className="header-button">
                             Войти
                         </Link>}

@@ -1,10 +1,11 @@
 "use client"
 import Image from 'next/image'
 import logo from '@/images/logo.png'
-import { useState } from 'react'
-import { signUp } from '@/app/store/slices/authSlice'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { signUp, setError } from '@/app/store/slices/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
 import { hendelDeleteResume } from '@/app/store/slices/resumeSlice'
+import { useRouter } from 'next/navigation'
 
 
 export default function EmployerSignup() {
@@ -18,13 +19,19 @@ export default function EmployerSignup() {
     const [company_logo, setCompanyLogo]= useState()
     const [password, setPassword]= useState("")
     const [password2, setPassword2]= useState("")
-
+    
+    const router = useRouter()
     const dispatch = useDispatch()
-
+    const error = useSelector((state) => state.auth.error)
 
     const onLogoChange = (e) =>{
         setCompanyLogo(e.target.files[0])
     }
+    useEffect(() => {
+        return()=>{
+            dispatch(setError(null))
+        }
+    }, [])
 
     const hendelSignup = () => {
         dispatch(signUp({
@@ -36,7 +43,7 @@ export default function EmployerSignup() {
             password2, 
             company_description,
             company_logo,
-        }))
+        }, router))
     }
 
   return (
@@ -53,6 +60,7 @@ export default function EmployerSignup() {
                         <input className="input" placeholder="Введите e-mail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                         <button className="button button-primary"  onClick={()=>setStep(2)}>Продолжить</button>  
                     </form>
+                    {error && Object.keys(error).map(key => (<p className='error' key={key}>{error[key]}</p>))}
                 </div>}
 
                 {step === 2 && <div className="card">
@@ -63,6 +71,7 @@ export default function EmployerSignup() {
                         <button className="button button-primary" type="button" onClick={()=>setStep(3)}>Продолжить</button>
                         <button className="button button-primary-border" type="button" onClick={()=>setStep(1)}>Назад</button>
                     </form>
+                    {error && Object.keys(error).map(key => (<p className='error' key={key}>{error[key]}</p>))}
                 </div>}
 
                 {step === 3 && <div className="card">
@@ -75,6 +84,7 @@ export default function EmployerSignup() {
                         <button className="button button-primary" type="button" onClick={()=>setStep(4)}>Продолжить</button>                         {/* onClick={()=>dispatch(authorize())} */}
                         <button className="button button-primary-border" onClick={()=>setStep(3)}>Назад</button> 
                     </form>
+                    {error && Object.keys(error).map(key => (<p className='error' key={key}>{error[key]}</p>))}
                 </div>}
 
                 {step === 4 && <div className="card">
@@ -85,6 +95,7 @@ export default function EmployerSignup() {
                         <button className="button button-primary" type="button" onClick={hendelSignup}>Регистрировать</button>
                         <button className="button button-primary-border" type="button" onClick={()=>setStep(3)}>Назад</button>
                     </form>
+                    {error && Object.keys(error).map(key => (<p className='error' key={key}>{error[key]}</p>))}
                 </div>}
             </section>
         </div>
