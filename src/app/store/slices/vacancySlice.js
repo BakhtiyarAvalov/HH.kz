@@ -25,11 +25,11 @@ export const vacancySlice = createSlice({
     // setVacancies: (state, action) => {
     //   state.vacancy = action.payload.vacancy
     // }, 
-    // hendelDeleteVacancy: (state, action) => {
-    //   let vacancies = [...state.vacancies]
-    //   vacancies = vacancies.filter(item => item.id !== action.payload)
-    //   state.vacancy = vacancies
-    // }, 
+    hendelDeleteVacancy: (state, action) => {
+      let vacancies = [...state.vacancies]
+      vacancies = vacancies.filter(item => item.id !== action.payload)
+      state.vacancies = vacancies
+    }, 
     setSpecializations: (state, action) => {
       state.specializations = action.payload
     }, 
@@ -117,6 +117,15 @@ export const createVacancy = (sendData, router) => async (dispatch) => {
       alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
   }
 }
+
+export const deleteVacancy = (id) => async (dispatch) => {
+  try{
+      const res = await axios.delete(`${END_POINT}/api/vacancy/${id}`)
+      dispatch(hendelDeleteVacancy(id))
+  }catch(e){
+      alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
+  }
+}
 // export const getResumeById = (id) => async (dispatch) => {
 //   try{
 //       const res = await axios.get(`${END_POINT}/api/resume/${id}`)
@@ -138,13 +147,6 @@ export const createVacancy = (sendData, router) => async (dispatch) => {
 //       alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
 //   }
 // }
-// export const deleteResume = (id) => async (dispatch) => {
-//   try{
-//       const res = await axios.delete(`${END_POINT}/api/resume/${id}`)
-//       dispatch(hendelDeleteResume(id))
-//   }catch(e){
-//       alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
-//   }
-// }
+
 
 export default vacancySlice.reducer
