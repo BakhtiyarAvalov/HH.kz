@@ -151,7 +151,7 @@ export default function CreateVacancy() {
             </fieldset>
             <AutoCompliteTegs placholder='' type='text' label='Ключевые навыки' size='fieldset-md fieldset-vertical' items={allSkills} onSelect={onSkillsChange} selected={skills.length > 0 ? skills.split(",").map(item => ({name: item})) : []}/>
             <fieldset className='fieldset-vertical fieldset-md'>
-                <label>Опыт работы</label>
+                <label>Тип занятости</label>
                 <div>
                     {empTypes.map(et => <div key={et.id} className='radio'>
                         <input type="radio" name='et' value = {et.id} onChange={(e) => setEmploymentType(e.target.value)}/>

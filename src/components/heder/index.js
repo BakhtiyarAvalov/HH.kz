@@ -1,11 +1,12 @@
 'use client'
 import { useDispatch, useSelector} from 'react-redux'
-import { logOut } from "@/app/store/slices/authSlice"
-
+import { logOut, authorize } from "@/app/store/slices/authSlice"
+import jwt_decode from 'jwt-decode'
 import logo from '../../images/logo.png'
 import search from '../../images/search.png'
 import Image from "next/image"
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 export default function Header () {
 
@@ -13,6 +14,17 @@ export default function Header () {
     const currentUser = useSelector((state) =>state.auth.currentUser)
 
     const dispatch = useDispatch()
+    useEffect (()=>{
+        const token = localStorage.getItem("token")
+        if(token){
+          let decodedToken = jwt_decode(token)
+          if(decodedToken.exp * 1000 > Date.now()){
+            dispatch(authorize({token}))
+          }else{
+            localStorage.removeItem("token")
+          }
+        }
+    },[])
 
     return (
         <header className="header">
@@ -25,11 +37,11 @@ export default function Header () {
                         <a>Работадетялм</a>
                         <a>Помощь</a>
                     </div>
-                    <div className = "header-iner">
-                        <button className="header-search">
-                            <Image alt='' src={search}/>
+                    <div className = "header-iner" >
+                        <Link className="header-search" href="/search/vacancy/advenced">
+                            <Image alt=''  src={search}/>
                             Поиск
-                        </button>
+                        </Link>
                         {currentUser && currentUser.role && currentUser.role.name !== "manager" &&
                             <Link className="header-button header-button-green" href='/create-vacancy'>
                                     Создать резюме

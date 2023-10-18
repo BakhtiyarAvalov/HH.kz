@@ -75,3 +75,6 @@ body, Image, img, div, input, a, li, ul, textarea, span, p, h1, h2, h3, ol, asid
 .mt-7{
     margin-top: 40px;
 }
+.ml-7{
+    margin-left: 40px;
+}
