@@ -54,9 +54,10 @@ export const { setVacancy, setVacancies, hendelDeleteVacancy, setSpecializations
 export const getMyVacancies = () => async (dispatch) => {
     try{
         const res = await axios.get(`${END_POINT}/api/vacancy`)
-        // console.log(res.data);
+        console.log(res.data);
         dispatch(setVacancies({vacancies: res.data}))
     }catch(e){
+      console.log("getMyVacancies", e);
         alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
     }
 }

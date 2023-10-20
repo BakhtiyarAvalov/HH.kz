@@ -16,7 +16,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { editResume, getResumeById } from '@/app/store/slices/resumeSlice'
 
-export default function CreateResume() {
+export default function EditResume() {
   
     //     id - должен совпадать с названием папки
     const {id} = useParams();

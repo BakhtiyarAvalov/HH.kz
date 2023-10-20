@@ -34,7 +34,11 @@ export default function Header () {
                         <Image alt='' src={logo}/>
                         {currentUser && currentUser.role && currentUser.role.name === "manager" && <Link href="/vacancy">Мои вакансии</Link>}
                         {currentUser && currentUser.role && currentUser.role.name !== "manager" && <Link href="/resumes">Мои резюме</Link>}
-                        <a>Работадетялм</a>
+                        {currentUser && currentUser.role && currentUser.role.name !== "manager" &&
+                            <Link  href='/applies'>
+                                    Отклики
+                            </Link>
+                        }                        <a>Работадетялм</a>
                         <a>Помощь</a>
                     </div>
                     <div className = "header-iner" >
@@ -43,12 +47,12 @@ export default function Header () {
                             Поиск
                         </Link>
                         {currentUser && currentUser.role && currentUser.role.name !== "manager" &&
-                            <Link className="header-button header-button-green" href='/create-vacancy'>
+                            <Link className="header-button header-button-green" href='/create-resume'>
                                     Создать резюме
                             </Link>
                         }
                         {currentUser && currentUser.role && currentUser.role.name === "manager" &&
-                            <Link className="header-button header-button-green" href='/create-resume'>
+                            <Link className="header-button header-button-green" href='/create-vacancy'>
                                     Создать вакансию
                             </Link>
                         }

@@ -74,7 +74,20 @@ export default function CreateVacancy() {
             about_company: ""
         }, router))
     }
-    
+    // console.log("create", {
+    //     name, 
+    //     specializationId: `${specializationId}`,
+    //     cityId: `${cityId}`,
+    //     description,
+    //     employmentTypeId,
+    //     salary_from, 
+    //     salary_to, 
+    //     salary_type, 
+    //     address, 
+    //     experienceId, 
+    //     skills, 
+    //     about_company: ""
+    // });
     const cities = useSelector(state => state.vacancy.cities)
     const experiences = useSelector(state => state.vacancy.experiences)
     const allSkills = useSelector(state => state.vacancy.skills)

@@ -19,7 +19,7 @@ import { createResume } from '@/app/store/slices/resumeSlice'
 export default function CreateResume() {
   
   const router = useRouter()
-  const dispatch = useDispatch
+  const dispatch = useDispatch()
 
   const [cities, setCities] = useState([])
   const [countries, setCountries] = useState([])
@@ -39,7 +39,7 @@ export default function CreateResume() {
   const [salary_type, setSalaryType] = useState("KZT")
   const [skills, setSellektedSkills] = useState([])
   const [education, setEducation] = useState([])
-  const [foreignLanguages, setForeignLanguages] = useState("")
+  const [foreignLanguages, setForeignLanguages] = useState([])
   const [employmentTypes, setSelectedEmptTypes] = useState([])
   const [about, setAbout] = useState("")
 
@@ -118,7 +118,7 @@ export default function CreateResume() {
   //   salary_type,
   //   skills,
   //   education,
-  //   foreinLanguages,
+  //   foreignLanguages,
   //   employmentTypes,
   //   workingHistories,
   // });
@@ -185,10 +185,10 @@ export default function CreateResume() {
         <AutoCompliteTegs placholder='' type='text' label='Ключевые навыки' size='fieldset-md' items={allSkills} onSelect={onSkillsChange} selected={skills.length > 0 ? skills.split(",").map(item => ({name: item})) : []}/>
         
         <h3>Образование</h3>
-        <AddEducation onChange={(eds) => setEducation(eds)} education={[]}/>
+        <AddEducation onChange={(eds) => setEducation(eds)} education={education}/>
 
         <h3>Владение языками</h3>
-        <AddLang onChange={(lns) => setForeignLanguages(lns)} foreignLanguages={[]}/>
+        <AddLang onChange={(lns) => setForeignLanguages(lns)} setForeignLanguages={(lns) => setForeignLanguages(lns)} foreignLanguages={foreignLanguages}/>
 
         <h3>Другая важная информация</h3>
         <SelectEmploymentTypes label="Занятость" size="fieldset-md" allEmploymentTypes={allEmploymentTypes} onChange={(tps) => (setSelectedEmptTypes(tps))} employmentTypes={[]}/>
