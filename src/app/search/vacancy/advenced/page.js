@@ -7,7 +7,6 @@ import { getSpecializations, getСities, getExperiences, getSkills, getEmpType }
 import ModalselectSpec from '@/components/ModalselectSpec'
 import AutoCompliteSelect from '@/components/AutoCompliteSelect'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 
 export default function SearchVacancyAdvenced() {
 
@@ -49,13 +48,13 @@ export default function SearchVacancyAdvenced() {
 
     const hendelSearch = () => {
         let queryString = "?"
-        if(q) queryString += `q = ${q}&`
-        if(specializationId) queryString += `specializationId = ${specializationId}`
-        if(cityId) queryString += `cityId = ${cityId}&`
+        if(q) queryString += `q=${q}&`
+        if(specializationId) queryString += `specializationId=${specializationId}&`
+        if(cityId) queryString += `cityId=${cityId}&`
         if(salary) queryString += `salary = ${salary}&`
-        if(salary_type) queryString += `salary_type = ${salary_type}&`
-        if(experienceId) queryString += `experienceId = ${experienceId}&`
-        if(employmentTypeId) queryString += `employmentTypeId = ${employmentTypeId}&`
+        if(salary_type) queryString += `salary_type=${salary_type}&`
+        if(experienceId) queryString += `experienceId=${experienceId}&`
+        if(employmentTypeId) queryString += `employmentTypeId=${employmentTypeId}&`
 
         router.push(`/search/vacancy${queryString}`)
     }
@@ -109,7 +108,7 @@ export default function SearchVacancyAdvenced() {
                     </div>)}
                 </div>
             </fieldset>
-            <button className='button button-primary' onClick={hendelSearch()}>Поиск</button>
+            <button className='button button-primary' onClick={hendelSearch}>Поиск</button>
         </div>
     </main>
   )

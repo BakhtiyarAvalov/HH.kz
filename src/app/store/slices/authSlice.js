@@ -80,7 +80,6 @@ export const signUp = (data, router) => (dispatch) => {
     router.push("employer/signin")
     // console.log("res.data", res.data);
   }).catch(e => {
-    // console.log(e.res.data);
     if(e.response && e.response.data)
     dispatch(setError(e.response.data))
   })

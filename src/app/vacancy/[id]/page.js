@@ -5,9 +5,8 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getVacancyById } from '@/app/store/slices/vacancySlice'
-// import { getMyResumes } from '@/app/store/slices/resumeSlice'
+import { getMyResumes } from '@/app/store/slices/resumeSlice'
 import { useParams } from 'next/navigation'
-// import { getMyResumes } from '@/app/store/slices/resumeSlice'
 import { handleClientScriptLoad } from 'next/script'
 import { createApplies, getEmployeeApplies } from '@/app/store/slices/applySlice'
 export default function VacancyPage() {
@@ -16,26 +15,26 @@ export default function VacancyPage() {
     const {id} = useParams();
     const vacancy = useSelector(state => state.vacancy.vacancy)
     const currentUser = useSelector(state => state.auth.currentUser)
-    // const resumes = useSelector(state => state.resume.resumes)
+    const resumes = useSelector(state => state.resume.resumes)
     const applies = useSelector(state => state.apply.applies)
 
     const [resumeId, setResume] = useState()
     
     const didMount = () => {
       dispatch(getVacancyById(id))
-      // dispatch(getMyResumes())
+      dispatch(getMyResumes())
       dispatch(getEmployeeApplies())
     }
 
     useEffect(didMount, [])
-    // useEffect(() =>{
-    //   if(resumes[0])
-    //   setResume(resumes[0].id)
-    // },[])
+    useEffect(() =>{
+      if(resumes[0])
+      setResume(resumes[0].id)
+    },[])
 
     const handleApply = () =>{
       dispatch(createApplies({
-        // resumeId, 
+        resumeId, 
         vacancyId: id
       }))
     }
@@ -48,7 +47,7 @@ export default function VacancyPage() {
 
     let skills = [];
     if(vacancy.skills) skills = vacancy.skills.split(",")
-    console.log("vacancy", currentUser);
+    // console.log("vacancy", currentUser);
   return (
     <main>
         <Header/>

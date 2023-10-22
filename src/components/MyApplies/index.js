@@ -54,10 +54,12 @@ export default function MyApplies({}){
         }
     }
     const showApplise = applies.map ((a, b) =>(
-    <MyApply 
+        <MyApply 
         item = {item}
         key = {item.id}
     />))
+
+    
     return <div className="table">
         <div className="row row-header flex flex-jc-sb">
             <div className={`col ${sortDirection}`} onClick={() => sortBy('status')}>

@@ -38,7 +38,8 @@ export default function Header () {
                             <Link  href='/applies'>
                                     Отклики
                             </Link>
-                        }                        <a>Работадетялм</a>
+                        }
+                        <a>Работадетялм</a>
                         <a>Помощь</a>
                     </div>
                     <div className = "header-iner" >

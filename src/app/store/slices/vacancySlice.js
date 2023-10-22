@@ -151,21 +151,21 @@ export const getSearchedVacancies= (params, router) => async (dispatch) => {
     } = params;
 
     let queryString = "?"
-    if(q) queryString += `q = ${q}&`
-    if(specializationId) queryString += `specializationId = ${specializationId}`
-    if(cityId) queryString += `cityId = ${cityId}&`
-    if(salary) queryString += `salary = ${salary}&`
-    if(salary_type) queryString += `salary_type = ${salary_type}&`
-    if(experienceId) queryString += `experienceId = ${experienceId}&`
-    if(employmentTypeId) queryString += `employmentTypeId = ${employmentTypeId}&`
+    if(q) queryString += `q=${q}&`
+    if(specializationId) queryString += `specializationId=${specializationId}&`
+    if(cityId) queryString += `cityId=${cityId}&`
+    if(salary) queryString += `salary=${salary}&`
+    if(salary_type) queryString += `salary_type=${salary_type}&`
+    if(experienceId) queryString += `experienceId=${experienceId}&`
+    if(employmentTypeId) queryString += `employmentTypeId=${employmentTypeId}&`
 
     router.push(`/search/vacancy${queryString}`)
       const res = await axios.get(`${END_POINT}/api/vacancy/search${queryString}`)
-      console.log("vacancies",res.data);
+      // console.log("vacancies",res.data);
       dispatch(setVacancies({vacancies: res.data}))
   }catch(e){
       alert("Что то прошло не так, сообщите о ошибке Тех. специалистам сайта!")
-      console.log("err", e);
+      // console.log("err", e);
 
   }
 }
